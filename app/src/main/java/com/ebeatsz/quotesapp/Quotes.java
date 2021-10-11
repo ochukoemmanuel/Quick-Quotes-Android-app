@@ -33,6 +33,18 @@ public class Quotes extends AppCompatActivity {
 
         categoryName.setText(getName);
 
+        if (getName.equals("Life")){
+            quotesLists.add((QuotesList) QuoteData.getLifeQuotes());
+        }else if (getName.equals("Motivation")){
+            quotesLists.add((QuotesList) QuoteData.getMotivationQuotes());
+        }else if (getName.equals("Love")){
+            quotesLists.add((QuotesList) QuoteData.getLoveQuotes());
+        }else if (getName.equals("Success")){
+            quotesLists.add((QuotesList) QuoteData.getSuccessQuotes());
+        }else if (getName.equals("English")){
+            quotesLists.add((QuotesList) QuoteData.getEnglishQuotes());
+        }
+
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
