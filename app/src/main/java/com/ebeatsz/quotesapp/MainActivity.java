@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final RecyclerView categoriesRycyclerView = findViewById(R.id.categoriesRecyclerView);
+        final RecyclerView categoriesRecyclerView = findViewById(R.id.categoriesRecyclerView);
 
-        categoriesRycyclerView.setHasFixedSize(true);
-        categoriesRycyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
+        categoriesRecyclerView.setHasFixedSize(true);
+        categoriesRecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
 
         // Love Category
         CategoriesList loveCategory = new CategoriesList("Love", R.drawable.ic_launcher_foreground);
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         categoriesLists.add(lifeCategory);
 
         // Set adapter to recyclerView
-        categoriesRycyclerView.setAdapter(new CategoriesAdapter(categoriesLists, MainActivity.this));
+        categoriesRecyclerView.setAdapter(new CategoriesAdapter(categoriesLists, MainActivity.this));
 
 
 

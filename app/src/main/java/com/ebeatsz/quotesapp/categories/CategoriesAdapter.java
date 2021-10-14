@@ -38,12 +38,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
         CategoriesList list2 = categoriesLists.get(position);
 
         holder.categoryName.setText(list2.getCategoryName());
-        holder.catgoryImage.setImageResource(list2.getCategoryImg());
+        holder.categoryImage.setImageResource(list2.getCategoryImg());
 
         holder.rootLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(context, Quotes.class);
+                Intent intent = new Intent(context, Quotes.class);
+                intent.putExtra("name", list2.getCategoryName());
 
                 context.startActivity(intent);
             }
@@ -58,14 +59,14 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         private final TextView categoryName;
-        private final ImageView catgoryImage;
+        private final ImageView categoryImage;
         private final CardView rootLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             categoryName = itemView.findViewById(R.id.categoryName);
-            catgoryImage = itemView.findViewById(R.id.catgoryImage);
+            categoryImage = itemView.findViewById(R.id.categoryImage);
             rootLayout = itemView.findViewById(R.id.rootLayout);
 
         }

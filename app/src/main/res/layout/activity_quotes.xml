@@ -47,7 +47,8 @@
             android:layout_marginBottom="20dp"
             android:layout_marginEnd="20dp"
             android:text="Writer Name"
-            android:textColor="#99FFFFFF" />
+            android:textColor="#99FFFFFF"
+            android:layout_marginRight="20dp" />
 
     </LinearLayout>
 
