@@ -45,6 +45,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
             public void onClick(View v) {
                 Intent intent = new Intent(context, Quotes.class);
                 intent.putExtra("name", list2.getCategoryName());
+                intent.putExtra("prevPage", "main");
 
                 context.startActivity(intent);
             }

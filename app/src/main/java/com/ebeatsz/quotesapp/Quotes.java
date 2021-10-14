@@ -21,6 +21,14 @@ public class Quotes extends AppCompatActivity {
     private final List<QuotesList> quotesLists = new ArrayList<>();
 
     private int currentQuotePosition = 0;
+    private String getPrevPage;
+    private String getQuote;
+    private String getWriter;
+    private String getName;
+
+    private Button prevBtn;
+    private Button nextBtn;
+    private ImageView copyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,25 +39,20 @@ public class Quotes extends AppCompatActivity {
         quoteTxt = findViewById(R.id.quoteTxt);
         writerName = findViewById(R.id.writerName);
 
-        final Button prevBtn = findViewById(R.id.prevBtn);
-        final Button nextBtn = findViewById(R.id.nextBtn);
-        final ImageView copyBtn = findViewById(R.id.copyBtn);
+        prevBtn = findViewById(R.id.prevBtn);
+        nextBtn = findViewById(R.id.nextBtn);
+        copyBtn = findViewById(R.id.copyBtn);
 
-        final String getName = getIntent().getStringExtra("name");
+        getName = getIntent().getStringExtra("name");
+
+        getQuote = getIntent().getStringExtra("quote");
+        getWriter = getIntent().getStringExtra("writer");
+        getPrevPage = getIntent().getStringExtra("prevPage");
 
         categoryName.setText(getName);
 
-        if (getName.equals("Life")){
-            quotesLists.addAll(QuoteData.getLifeQuotes());
-        }else if (getName.equals("Motivation")){
-            quotesLists.addAll((QuoteData.getMotivationQuotes()));
-        }else if (getName.equals("Love")){
-            quotesLists.addAll(QuoteData.getLoveQuotes());
-        }else if (getName.equals("Success")){
-            quotesLists.addAll(QuoteData.getSuccessQuotes());
-        }else if (getName.equals("English")){
-            quotesLists.addAll(QuoteData.getEnglishQuotes());
-        }
+
+
 
         setQuoteToTextView();
 
@@ -70,8 +73,13 @@ public class Quotes extends AppCompatActivity {
             public void onClick(View v) {
                 ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 CharSequence label;
-                ClipData clipData = ClipData.newPlainText("quote", quotesLists.get(currentQuotePosition).getQuote() + "\nby: " + quotesLists.get(currentQuotePosition).getWriter());
-                clipboardManager.setPrimaryClip(clipData);
+                if (getPrevPage.equals("Timeline")){
+                    ClipData clipData = ClipData.newPlainText("quote", getQuote + "\nby: " + getWriter);
+                    clipboardManager.setPrimaryClip(clipData);
+                } else if (getPrevPage.equals("main")){
+                    ClipData clipData = ClipData.newPlainText("quote", quotesLists.get(currentQuotePosition).getQuote() + "\nby: " + quotesLists.get(currentQuotePosition).getWriter());
+                    clipboardManager.setPrimaryClip(clipData);
+                }
 
                 Toast.makeText(Quotes.this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
             }
@@ -92,7 +100,29 @@ public class Quotes extends AppCompatActivity {
     }
 
     private void setQuoteToTextView(){
-        quoteTxt.setText(quotesLists.get(currentQuotePosition).getQuote());
-        writerName.setText(quotesLists.get(currentQuotePosition).getWriter());
+        if (getPrevPage.equals("Timeline")){
+            // Set prevBtn and nextBtn to not visible
+            prevBtn.setVisibility(View.GONE);
+            nextBtn.setVisibility(View.GONE);
+
+            quoteTxt.setText(getQuote);
+            writerName.setText(getWriter);
+        } else if (getPrevPage.equals("main")){
+
+            quoteTxt.setText(quotesLists.get(currentQuotePosition).getQuote());
+            writerName.setText(quotesLists.get(currentQuotePosition).getWriter());
+
+            if (getName.equals("Life")){
+                quotesLists.addAll(QuoteData.getLifeQuotes());
+            }else if (getName.equals("Motivation")){
+                quotesLists.addAll((QuoteData.getMotivationQuotes()));
+            }else if (getName.equals("Love")){
+                quotesLists.addAll(QuoteData.getLoveQuotes());
+            }else if (getName.equals("Success")){
+                quotesLists.addAll(QuoteData.getSuccessQuotes());
+            }else if (getName.equals("English")){
+                quotesLists.addAll(QuoteData.getEnglishQuotes());
+            }
+        }
     }
 }

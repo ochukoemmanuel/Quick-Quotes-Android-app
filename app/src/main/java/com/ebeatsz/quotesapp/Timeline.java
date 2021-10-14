@@ -27,7 +27,7 @@ public class Timeline extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(Timeline.this ));
 
         for (int i = 0; i < 10; i++){
-            quotesList.add(new QuotesList("Get free daily quotes", "free quotes"));
+            quotesList.add(new QuotesList("Get free daily quotes " + i, "free quotes " + i));
         }
 
 
